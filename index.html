@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Pessoal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+</head>
+<body>
+    <div class="scroll-up-btn">
+        <i class="fas fa-angle-up"></i>
+    </div>
+    <div class="scroll-up-whatsapp">
+        <a href="https://web.whatsapp.com/send?phone=5561993975053" target="_blank"><i class="fa fa-whatsapp"></i></a>
+    </div>
+
+    <!--menu início-->
+    <nav class="navbar">
+        <div class="max-width">
+            <div class="logo"><a href="#">Portfó<span>lio.</span></a></div>
+            <ul class="menu">
+                <li id="menu-1" class="menu-item"><a id="close-menu" class="menu-link" href="#home">Início</a></li>
+                <li id="menu-2" class="menu-item"><a id="close-menu" class="menu-link" href="#about">Sobre</a></li>
+                <li id="menu-3" class="menu-item"><a id="close-menu" class="menu-link" href="#skills">Habilidades</a></li>
+                <li id="menu-4" class="menu-item"><a id="close-menu" class="menu-link" href="#works">Projetos</a></li>
+                <li id="menu-5" class="menu-item"><a id="close-menu" class="menu-link" href="#contact">Contato</a></li>
+            </ul>
+            <div class="social-media">
+                <a id="social-1" href="https://github.com/1caroMartins"><i class="fa fa-github"></i></a>
+                <a id="social-2" href="https://www.linkedin.com/in/1caro-martins/"><i class="fa fa-linkedin-square"></i></a>
+            </div>
+            <div id="close-menu" class="toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            <!--<span>Fechar</span>-->
+            </div>
+        </div>
+    </nav>
+
+    <!--home início-->
+    <section class="home" id="home">
+        <div class="max-width">
+            <div class="banner">
+                <img src="imagens/banner.png" alt="">
+            </div>
+            <div class="home-content">
+                <div class="text-1">Olá, meu nome é</div>
+                <div class="text-2">Icaro Martins</div>
+                <div class="text-3">E eu sou <span class="typing"></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!--sobre início-->
+    <section class="about" id="about">
+        <div class="max-width">
+            <h2 class="title">Sobre Mim</h2>
+            <div class="about-content">
+                <div class="column left" data-anime="left">
+                    <img src="imagens/profile-1.jpg" alt="">
+                </div>
+                <div class="column right" data-anime="up">
+                    <div class="text">Eu sou o Icaro e eu sou <span class="typing-2"></span></div>
+                    <p>Sou natural de Brasília-DF e me formei em Engenharia de Produção na Universidade Federal de Viçosa (UFV), em Minas Gerais. Passei alguns anos estudando para concursos públicos, mas em meados de 2022, ao estudar Power BI para me atualizar como Engenheiro para o mercado, descobri a área de Análise de Dados, a qual tenho gostado muito. Desde então venho estudando não só essa ferramenta como o conceito de Business Intelligence e seus processos, adquirindo cursos e livros, além de colocar a mão na massa codando, analisando dados e produzindo painéis.</p>
+                    <a href="PDF/Curriculo_SIMP.pdf">Download CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!--habilidades início-->
+    <section class="skills" id="skills">
+        <div class="max-width">
+            <h2 class="title">Habilidades</h2>
+            <div class="skills-content">
+                
+                <div class="card" data-anime="left">
+                    <div class="box">
+                        <i class="ms-Icon ms-Icon--PowerBILogo"></i>
+                        <h3>PowerBI</h3>
+                        <p>ETL (PowerQuery), Modelagem (Star Schema), Análises estatíticas (DAX e gráficos) e Visualização de dados com Storytelling.</p>
+                    </div>
+                </div>
+                
+                <div class="card" data-anime="right">
+                    <div class="box">
+                        <i class="ms-Icon ms-Icon--ExcelLogo"></i>
+                        <h3>Excel</h3>
+                        <p>Análises, principalmente exploratórias, usando funções (pesquisa, matemática, estatísica, etc.), tabela dinâmica e gráficos.</p>
+                    </div>
+                </div>
+                
+                <div class="card" data-anime="left">
+                    <div class="box">
+                        <i class="fa fa-mysql"></i>
+                        <h3>Mysql</h3>
+                        <p>Criar, inserir, atualizar, excluir e consultar informações do SGBD utilizando linguagem SQL.</p>
+                    </div>
+                </div>
+                
+                <div class="card" data-anime="right">
+                    <div class="box">
+                        <i class="fa fa-python"></i>
+                        <h3>Python</h3>
+                        <p>Fundamentos de Python. Evoluindo no estudo de Pandas e PySpark para Análise de Dados.</p>
+                    </div>
+                </div>
+                
+                <div class="card" data-anime="left">
+                    <div class="box">
+                        <i class="fa fa-jupyter"></i>
+                        <h3>Jupyter</h3>
+                        <p>Notebooks para documentação de códigos que podem ser lidos com serviços em nuvem, como o próprio Jupyter ou Google Colab.</p>
+                    </div>
+                </div>
+                
+                <div class="card" data-anime="right">
+                    <div class="box">
+                        <i class="fa fa-github"></i>
+                        <h3>Git e GitHub</h3>
+                        <p>Versionameto de códigos utilizando repositórios armazenados em máquinas e na nuvem.</p>
+                    </div>
+                </div>
+
+                <div class="imgcentral">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!--projetos início-->
+    <section class="works" id="works">
+        <div class="max-width">
+            <h2 class="title">Projetos</h2>
+            <div class="works-content">
+
+                <h3 class="subtitle">últimos</h3>
+                <ul class="last owl-carousel" data-anime="up">
+                    <li class="card">
+                        <div class="box">
+                            <img src="imagens/work1.jpg" alt="painel">
+                            <div class="info-card">
+                                <h3>Painel de Vendas</h3>
+                                <P>Dessenvolvido em Power BI.</P>
+                                <span>Saiba mais</span>     
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card">
+                        <div class="box">
+                            <img src="imagens/work2.jpg" alt="">
+                            <div class="info-card">
+                                <h3>Título</h3>
+                                <P>Descrição.</P>
+                                <span>Saiba mais</span>     
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card">
+                        <div class="box">
+                            <img src="imagens/work2.jpg" alt="">
+                            <div class="info-card">
+                                <h3>Título</h3>
+                                <P>Descrição.</P>
+                                <span>Saiba mais</span>     
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card">
+                        <div class="box">
+                            <img src="imagens/work2.jpg" alt="">
+                            <div class="info-card">
+                                <h3>Título</h3>
+                                <P>Descrição.</P>
+                                <span>Saiba mais</span>     
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card">
+                        <div class="box">
+                            <img src="imagens/work2.jpg" alt="">
+                            <div class="info-card">
+                                <h3>Título</h3>
+                                <P>Descrição.</P>
+                                <span>Saiba mais</span>     
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                
+                <h3 class="subtitle">por área</h3>
+                <ul class="filter" data-anime="right">
+                    <li class="category active" data-filter="all">Todos</li>
+                    <li class="category" data-filter="vendas">Vendas</li>
+                    <li class="category" data-filter="producao">Produção</li>
+                    <li class="category" data-filter="rh">RH</li>
+                    <li class="category" data-filter="logistica">Logística</li>
+                </ul>
+
+                <ul class="itens" data-anime="up">
+                    <li class="card vendas">
+                        <div class="box">
+                            <img src="imagens/work1.jpg" alt="painel">
+                            <div class="info-card">
+                                <h3>Painel de Vendas</h3>
+                                <P>Dessenvolvido em Power BI.</P>
+                                <span>Saiba mais</span>     
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card vendas">
+                        <div class="box">
+                            <img src="imagens/work2.jpg" alt="">
+                            <div class="info-card">
+                                <h3>Título</h3>
+                                <P>Descrição.</P>
+                                <span>Saiba mais</span>     
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card producao">
+                        <div class="box">
+                            <img src="imagens/work2.jpg" alt="">
+                            <div class="info-card">
+                                <h3>Título</h3>
+                                <P>Descrição.</P>
+                                <span>Saiba mais</span>     
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card logistica">
+                        <div class="box">
+                            <img src="imagens/work2.jpg" alt="">
+                            <div class="info-card">
+                                <h3>Título</h3>
+                                <P>Descrição.</P>
+                                <span>Saiba mais</span>     
+                            </div>
+                        </div>
+                    </li>
+                    <li class="card rh">
+                        <div class="box">
+                            <img src="imagens/work2.jpg" alt="">
+                            <div class="info-card">
+                                <h3>Título</h3>
+                                <P>Descrição.</P>
+                                <span>Saiba mais</span>     
+                            </div>
+                        </div>
+                    </li>            
+                </ul>
+
+            </div>
+        </div>
+    </section>
+
+    <!--contato início-->
+    <section class="contact" id="contact">
+        <div class="max-width">
+            <h2 class="title">Contato</h2>
+            <div class="contact-content">
+                <div class="column left" data-anime="left">
+                    <div class="text">Entre em contato</div>
+                    <p>Se interessou? Por favor, entre em contato para mais informações e também para saber se as informações aqui contidas estão atualizadas.</p>  
+                    <div class="icons">
+                        <div class="row">
+                            <i class="fas fa-user"></i>
+                            <div class="info">
+                                <div class="head">Nome</div>
+                                <div class="sub-title">Icaro Martins</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="info">
+                                <div class="head">Endereço</div>
+                                <div class="sub-title">Brasília-DF, Brasil</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <i class="fas fa-envelope"></i>
+                            <div class="info">
+                                <div class="head">Email</div>
+                                <div class="sub-title">icaro_dm@hotmail.com</div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="column right" data-anime="up">
+                    <div class="text">Mensagem</div>
+                    <form action="mailto:icaro_dm@hotmail.com">
+                        <div class="fields">
+                            <div class="field name">
+                                <input type="text" placeholder="Nome" required>
+                            </div>
+                            <div class="field email">
+                                <input type="email" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <input type="text" placeholder="Assunto" required>
+                        </div>
+                        <div class="field textarea">
+                            <textarea cols="30" rows="10" placeholder="Escreva sua mensagem..." required></textarea>
+                        </div>
+                        <div class="button">
+                                <button type="submit">Enviar mensagem</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--rodapé início-->
+    <footer>
+        <span>Criado por <a href="">Icaro Martins</a> | <span class="far fa-copyright"></span> 2023 Todos os direitos reservados.</span>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
