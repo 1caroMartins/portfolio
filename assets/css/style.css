@@ -744,13 +744,13 @@ section .title::after{
     display: flex;
     justify-content: right;
 }
-.contact .thankyou .success{
+.success{
     font-size: 18px;
     color: green;
     animation: buttons 0.3s linear;
     display: none;
 }
-.contact .thankyou .danger{
+.danger{
     font-size: 18px;
     color: crimson;
     transition: 0.3s ease;
