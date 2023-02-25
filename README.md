@@ -1,4 +1,4 @@
-# Portifolio
+# Portfolio
 
 Olá, este é meu portfolio de Analista de Dados.
 Acesse a página: https://1caromartins.github.io/portfolio/
