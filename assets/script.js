@@ -123,10 +123,10 @@ if(target.length) {
 
 //Mensagem formulário
 function message(){
-    var Name = document.getElementById('name');
-    var email = document.getElementById('email');
-    var subject = document.getElementById('subject');
-    var msg = document.getElementById('msg');
+    var Name = document.getElementsByName('name');
+    var email = document.getElementsByName('email');
+    var subject = document.getElementByName('_subject');
+    var msg = document.getElementByName('message');
     const success = document.getElementById('success');
     const danger = document.getElementById('danger');
 
@@ -143,8 +143,5 @@ function message(){
         success.style.display = 'block';
     }
 
-    setTimeout(() => {
-        danger.style.display = 'none';
-        success.style.display = 'none';
-    }, 4000);    
+    
 }
