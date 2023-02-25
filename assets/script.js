@@ -121,7 +121,7 @@ if(target.length) {
     },10))
 }
 
-//Mensagem formulário
+//Mensagem formulário 
 function message(){
     var Name = document.getElementsByName('name');
     var email = document.getElementsByName('email');
@@ -142,6 +142,12 @@ function message(){
 
         success.style.display = 'block';
     }
+
+
+    setTimeout(() => {
+        danger.style.display = 'none';
+        success.style.display = 'none'
+    }, 4000);
 
     
 }

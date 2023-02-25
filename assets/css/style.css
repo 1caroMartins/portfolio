@@ -738,26 +738,24 @@ section .title::after{
     color: crimson;
     background: none;
 }
-.contact .right form .thankyou{
+.contact .thankyou{
     width: 100%;
-    position: relative;
-    margin-bottom: 60px;
+    margin-top: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: right;
 }
 .contact .thankyou .success{
-    font-size: 20px;
+    font-size: 18px;
     color: green;
-    position: relative;
     animation: buttons 0.3s linear;
     display: none;
 }
 .contact .thankyou .danger{
-    font-size: 20px;
+    font-size: 18px;
     color: crimson;
-    position: relative;
     transition: 0.3s ease;
     animation: buttons 0.3s linear;
+    display: none;
 }
 /* Sessão rodapé estilo */
 footer{
