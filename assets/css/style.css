@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Ubuntu:ital,wght@0,400;0,500;1,700&display=swap');
+
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css);
 @import url(https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.min.css);
 @import url(https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css);
@@ -207,19 +208,6 @@ html{
     transition-delay: 0.125s;
 }
 
-
-/* animação itens menu */
-@keyframes MoveItemMenu{
-    0%{
-        transform: translateY(-30rem);
-    }
-    100%{
-        transform: translateY(0rem);
-    }
-}
-
-
-
 /* sessão home estilo */
 .home{
     display: flex;
@@ -240,28 +228,12 @@ html{
     height: 100%;
     overflow: hidden;
 }
-@keyframes zoom {
-    0%{
-        transform: scale(1.2);
-    }
-    100%{
-        transform: scale(1);
-    }
-}
 .home .banner img{
     width: 100%;
     height: 100%;
     object-fit: cover;
     user-select: none;
     animation: zoom 25s;
-}
-@keyframes MoveItem{
-    0%{
-        transform: translateY(10rem);
-    }
-    100%{
-        transform: translateY(0rem);
-    }
 }
 .home .home-content .text-1{
     font-size: 27px;
@@ -780,6 +752,9 @@ footer span a{
 footer span a:hover{
     text-decoration: underline;
 }
+
+
+
 /* Animação da Sobre, Habilidades, Projetos e Contato */
 [data-anime]{
     opacity: 0;
