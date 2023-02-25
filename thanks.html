@@ -4,18 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="10;url=https://1caromartins.github.io/portfolio/">
     <title>Obrigado!</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/keyframes.css">
+    <script type="text/javascript">
+     
+        function linkProtetor(link)
+        {
+            var lnk = link;
+            lnk = lnk.substr(lnk.search("url=")+4);
+            return lnk;
+        }
+
+        var linkpro = window.parent.document.location.href;
+        linkpro = linkProtetor(linkpro);
+
+        var ss = -1;
+
+        function atualizaContador(futuro)
+        {
+         ss = (ss==-1) ? futuro : ss;
+         var faltam =  'Você será redirecionado para a home em '+ss+' segundos.';
+
+             if (ss > 0)
+             {
+                document.getElementById('contador').innerHTML = faltam;
+                ss--;
+                setTimeout(atualizaContador,1000);
+             }
+             else
+             {
+                document.location.href = 'https://1caromartins.github.io/portfolio/';
+             }
+        }
+    </script>
 </head>
-<body>
-    <section class="thanku" id="thanku">
+<body onLoad="atualizaContador(5);">
+    <section class="thanks" id="thanks">
         <div class="max-width">
-            <div class="home-content">
-                <h2>Obrigado por sua mensagem!</h2>
-                <div class="success" id="success">Sua mensagem foi enviada com sucesso!</div>
-                <div class="danger" id="danger">Nenhum campo pode estar vazio!</div>
+            <h2 class="title">Obrigado pela sua mensagem!</h2>
+            <div class="thanks-content">
+                <div id="contador"></div>
             </div>
         </div>
     </section>

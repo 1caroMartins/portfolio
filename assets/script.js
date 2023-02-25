@@ -121,33 +121,3 @@ if(target.length) {
     },10))
 }
 
-//Mensagem formulário 
-function message(){
-    var Name = document.getElementsByName('name');
-    var email = document.getElementsByName('email');
-    var subject = document.getElementByName('_subject');
-    var msg = document.getElementByName('message');
-    const success = document.getElementById('success');
-    const danger = document.getElementById('danger');
-
-    if(Name.value === '' || email.value === '' || subject.value === '' || msg.value === ''){
-        danger.style.display = 'block';
-    }else{
-        setTimeout(() => {
-            Name.value = '';
-            email.value = '';
-            subject.value = '';
-            msg.value = '';
-        }, 2000);
-
-        success.style.display = 'block';
-    }
-
-
-    setTimeout(() => {
-        danger.style.display = 'none';
-        success.style.display = 'none'
-    }, 4000);
-
-    
-}
