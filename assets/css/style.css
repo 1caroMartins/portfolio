@@ -864,6 +864,10 @@ footer span a:hover{
     .navbar .menu li{
         display: block;
         position: relative;
+        top: -100%;
+    }
+    .show-menu .navbar .menu li{
+        top: 0;
     }
     .navbar .menu li a{
         display: inline-block;
@@ -872,6 +876,7 @@ footer span a:hover{
     }
     .navbar .social-media{
         display: block;
+        width: fit-content;
         padding-right: 50px;
         transition: all 0.3s ease;
     }
