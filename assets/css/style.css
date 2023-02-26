@@ -875,9 +875,11 @@ footer span a:hover{
         font-size: 25px;
     }
     .navbar .social-media{
-        display: block;
-        width: fit-content;
-        padding-right: 50px;
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        width: 100%;
+        left: 50%;
         transition: all 0.3s ease;
     }
     .show-menu .logo a{
@@ -888,7 +890,9 @@ footer span a:hover{
         z-index: 999;
         position: fixed;
         margin-top: 900px;
+        padding-left: 35px;
         width: 100%;
+        left: 0;
         text-align: center;
         animation: MoveItemMenu 1.4s forwards;
     }
