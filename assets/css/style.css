@@ -862,15 +862,17 @@ footer span a:hover{
         top: 0;
     }
     .navbar .menu li{
-        display: block;
+        display: flex;
+        flex-direction: column;
+        top: 0;
     }
     .navbar .menu li a{
         display: inline-block;
-        margin: 20px 0;
+        margin: 15px 0;
         font-size: 25px;
     }
     .navbar .social-media{
-        display: inline-block;
+        display: block;
         padding-right: 50px;
         transition: all 0.3s ease;
     }
