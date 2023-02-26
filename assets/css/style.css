@@ -839,7 +839,8 @@ footer span a:hover{
 
 @media (max-width: 947px){
     .toggle{
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
         z-index: 999;
     }
     .show-menu .toggle{
@@ -852,8 +853,8 @@ footer span a:hover{
         left: 0;
         top: -100%;
         background: rgba(0, 0, 0, 0.733);
-       /* backdrop-filter: blur(10px) saturate(110%);
-        -webkit-backdrop-filter: blur(10px) saturate(110%);*/
+        backdrop-filter: blur(10px) saturate(110%);
+        -webkit-backdrop-filter: blur(10px) saturate(110%);
         text-align: center;
         padding-top: 80px;
         transition: all 0.3s ease;
@@ -870,8 +871,12 @@ footer span a:hover{
         font-size: 25px;
     }
     .navbar .social-media{
-        display: inline-block;
-        padding-right: 50px;
+        display: block;
+        width: 100%;
+        left: 0;
+        margin-left: 25px;
+        position: absolute;
+        text-align: center;
         transition: all 0.3s ease;
     }
     .show-menu .logo a{
