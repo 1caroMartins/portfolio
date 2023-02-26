@@ -29,7 +29,10 @@ html{
 }
 .navbar.sticky{
     padding: 15px 0;
-    background: crimson;
+    background: #118DFF;
+    background: rgba(0, 0, 0, 0.733);
+    /*backdrop-filter: blur(10px) saturate(110%);
+    -webkit-backdrop-filter: blur(10px) saturate(110%);*/
 }
 .navbar .max-width{
     display: flex;
@@ -42,12 +45,14 @@ html{
     font-weight: 600;
 }
 .navbar .logo a span{
-    color: crimson;
+    color: #fffb00;
     transition: all 0.3s ease;
 }
+/*
 .navbar.sticky .logo a span{
     color: #fafafa;
-}
+} */
+
 .navbar .menu li{
     list-style: none;
     display: inline-block;
@@ -57,14 +62,16 @@ html{
     font-size: 18px;
     font-weight: 500;
     margin-left: 25px;
-    transition: color 0.3s ease;
+    transition: color 0.7s;
 }
 .navbar .menu li a:hover{
-    color: crimson;
+    color: #118DFF;
 }
+/*
 .navbar.sticky .menu li a:hover{
     color: #fafafa;
-}
+}*/
+
 .social-media{
     display: inline-block;
 }
@@ -73,21 +80,22 @@ html{
     color: #fafafa;
     font-size: 30px;
     margin-left: 25px;
-    transition: color 0.3s ease;
+    transition: color 0.7s;
 }
 .social-media i:hover{
-    color: crimson;
+    color: #fffb00;
 }
+/*
 .navbar.sticky .social-media i:hover{
     color: #fafafa;
-}
+}*/
 
 /* menu btn estilo */
 .scroll-up-btn{
     position: fixed;
     width: 42px;
     height: 45px;
-    background: crimson;
+    background: #118DFF;
     box-shadow: 1px 2px 3px 0px rgb(0 0 0 / 50%);
     right: 30px;
     bottom: 10px;
@@ -242,6 +250,7 @@ html{
 .home .home-content .text-2{
     font-size: 75px;
     font-weight: 600;
+    text-shadow: .3rem .4rem 2px rgba(0, 0, 0, 0.404);
     margin-left: -3px;
     animation: MoveItem 0.7s forwards;
 }
@@ -251,7 +260,7 @@ html{
     animation: MoveItem 0.9s forwards;
 }
 .home .home-content .text-3 span{
-    color: crimson;
+    color: #fffb00;
     font-weight: 500;
     animation: MoveItem 0.9s forwards;
 }
@@ -282,7 +291,7 @@ section .title::after{
     bottom: -12px;
     left: 50%;
     font-size: 20px;
-    color: crimson;
+    color: #118DFF;
     padding: 5px;
     background: #fff;
     transform: translateX(-50%);
@@ -326,25 +335,25 @@ section .title::after{
     margin-bottom: 10px;
 }
 .about .about-content .right .text span{
-    color: crimson;
+    color: #118DFF;
 }
 .about .about-content .right p{
     text-align: justify;
 }
 .about .about-content .right a{
     display: inline-block;
-    background: crimson;
+    background: #118DFF;
     color: #fff;
     font-size: 20px;
     font-weight: 500;
     padding: 10px 30px;
     margin-top: 20px;
     border-radius: 6px;
-    border: 2px solid crimson;
+    border: 2px solid #118DFF;
     transition: all 0.3s ease;
 }
 .about .about-content .right a:hover{
-    color: crimson;
+    color: #118DFF;
     background: none;
 }
 /* sessão conhecimentos estilo */
@@ -358,6 +367,7 @@ section .title::after{
 }
 .skills .title::after{
     background: #111;
+    color: #fffb00;
     content: "o que eu sei";
 }
 .skills .skills-content{
@@ -416,7 +426,7 @@ section .title::after{
 }
 .skills .skills-content .card i{
     font-size: 35px;
-    color: crimson;
+    color: #fffb00;
     transition: all .5s ease;
 }
 .skills .skills-content .card h3{
@@ -462,11 +472,11 @@ section .title::after{
 }
 .works .works-content .filter .category{
     display: inline-block;
-    background: crimson;
+    background: #118DFF;
     width: 100px;
     text-align: center;
     color: #fafafa;
-    border: 2px solid crimson;
+    border: 2px solid #118DFF;
     font-size: 15px;
     font-weight: 500;
     padding: 7px 0;
@@ -477,7 +487,7 @@ section .title::after{
 }
 .works .works-content .filter .category.active{
     background: #fafafa;
-    color: crimson;
+    color: #118DFF;
     box-shadow: 1px 1px 2px 0px rgb(0 0 0 / 50%);
 }
 
@@ -598,11 +608,11 @@ section .title::after{
 }
 .works .works-content .card .box .info-card span{
     display: inline-block;
-    background: crimson;
+    background: #118DFF;
     width: 100px;
     text-align: center;
     color: #fafafa;
-    border: 2px solid crimson;
+    border: 2px solid #118DFF;
     font-size: 15px;
     font-weight: 500;
     padding: 7px 0;
@@ -613,7 +623,7 @@ section .title::after{
 }
 .works .works-content .card .box .info-card span:hover{
     background: #fafafa;
-    color: crimson;
+    color: #118DFF;
     box-shadow: 1px 1px 2px 0px rgb(0 0 0 / 50%);
 }
 
@@ -629,7 +639,7 @@ section .title::after{
     margin: 0 5px;
     outline: none!important;
     border-radius: 50%;
-    border: 2px solid crimson!important;
+    border: 2px solid #118DFF!important;
     transition: all 0.3s ease;
 }
 .owl-dot.active{
@@ -638,7 +648,7 @@ section .title::after{
 }
 .owl-dot.active,
 .owl-dot.active:hover{
-    background: crimson!important;
+    background: #118DFF!important;
 }
 /* sessão contato estilo */
 .contact{
@@ -676,7 +686,7 @@ section .title::after{
 }
 .contact .contact-content .row i{
     font-size: 25px;
-    color: crimson;
+    color: #118DFF;
 }
 .contact .contact-content .info .head{
     font-weight: 500;
@@ -725,8 +735,8 @@ section .title::after{
 .contact .right form .button button{
     width: 100%;
     height: 100%;
-    border: 2px solid crimson;
-    background: crimson;
+    border: 2px solid #118DFF;
+    background: #118DFF;
     color: #fafafa;
     font-size: 18px;
     font-weight: 500;
@@ -735,7 +745,7 @@ section .title::after{
     transition: all 0.3s ease;
 }
 .contact .right form .button button:hover{
-    color: crimson;
+    color: #118DFF;
     background: none;
 }
 
@@ -765,7 +775,6 @@ section .title::after{
     color: #fafafa;
 }
 
-
 /* Sessão rodapé estilo */
 footer{
     background: #111;
@@ -774,7 +783,7 @@ footer{
     text-align: center;
 }
 footer span a{
-    color: crimson;
+    color: #fffb00;
     text-decoration: none;
 }
 footer span a:hover{
@@ -896,10 +905,10 @@ footer span a:hover{
         font-size: 50px;
     }
     .show-menu .navbar.sticky .menu li a:hover{
-        color: crimson;
+        color: #118DFF;
     }
     .show-menu .navbar.sticky .social-media i:hover{
-        color: crimson;
+        color: #118DFF;
     }
     .show-menu .navbar.sticky{
         padding: 30px 0;
