@@ -839,8 +839,7 @@ footer span a:hover{
 
 @media (max-width: 947px){
     .toggle{
-        display: flex;
-        flex-direction: column;
+        display: inline-block;
         z-index: 999;
     }
     .show-menu .toggle{
@@ -848,7 +847,7 @@ footer span a:hover{
     }
     .navbar .menu{
         position: fixed;
-        height: 100vh;
+        height: 100%;
         width: 100%;
         left: 0;
         top: -100%;
@@ -871,12 +870,8 @@ footer span a:hover{
         font-size: 25px;
     }
     .navbar .social-media{
-        display: block;
-        width: 100%;
-        left: 0;
-        margin-left: 25px;
-        position: absolute;
-        text-align: center;
+        display: inline-block;
+        padding-right: 50px;
         transition: all 0.3s ease;
     }
     .show-menu .logo a{
