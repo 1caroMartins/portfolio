@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <title>Projeto 1</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/keyframes.css">
+</head>
+<body>
+    <div class="back">
+        <a href="index.html"><i class="fa fa-arrow-left"></i></a>
+    </div>
+    
+    <!-- objetivo -->
+    <section class="objective" id="objective">
+        <div class="max-width">
+            <h2 class="title">Requisitos</h2>
+            <div class="objective-content">
+
+                <div class="column left">
+                    <div class="text">Perguntas respondidas </div>
+                    <ul>
+                        <p>Página 1</p>
+                        <li>Faturamento total e percentual da meta imposta que foi atingida pela empresa (anos   e meses em que a meta foi batida).</li>
+                        <li>Variedade de itens vendidos em comparação a anos anteriores.</li>
+                        <li>Quantidade de compradores em comparação a anos anteriores.</li>
+                        <li>Contribuição da categoria e subcategoria de produtos em relação ao Faturamento.</li>
+                        <li>Faturamento e meta e percentual de atingimento de meta dos Representantes.</li>
+                        <li>Top 3 Representantes por mês.</li>
+                        <br> 
+                        <p>Página 2</p>   
+                        <li>Faturamento em relação a ano e mês anteriores.</li>
+                        <li>Nº de vendas realizadas em relação a ano e mês anteriores.</li>
+                        <li>Ticket Médio de vendas.</li>
+                        <li>Meses em que o volume de vendas fica acima ou abaixo da média.</li>
+                        <li>Produtos que mais impactam no Faturamento (utilizando o principio de Pareto).</li>
+                        <li>Top N produtos mais vendidos.</li>
+                        <br>
+                        <p>Página 3</p>
+                        <li>Nº de Novos Clientes e clientes antigos no mês/ano.</li>
+                        <li>Ticket Médio de Clientes.</li>
+                        <li>Lifetime Value.</li>
+                        <li>Ramo atividade que mais impacta no Faturamento e seu número de clientes.</li>
+                        <li>Top 3 clientes que geram mais Faturamento. E quem são eles.</li>
+                        <li>Faturamento e nº de Clientes por Estado e Cidade.</li>
+                    </ul>
+                </div>
+
+                <div class="column right">
+                    <div class="text">Definições da área</div>
+                    <ul>
+                        <p>KPI 1</p>
+                        <li>Fórmula 1</li>
+                        <br>
+                        <p>KPI 2</p>
+                        <li>Fórmula 2</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ETL e Modelagem -->
+    <section class="modeling" id="modeling">
+        <div class="max-width">
+            <h2 class="title">ETL e Modelagem</h2>
+            <div class="modeling-content">
+
+                <div class="column left">
+                    <div class="text">Relacionamento entre as tabelas</div>
+                    <p>O processo de <span>ETL</span> deste projeto foi feito inteiramente em <span>Power Query</span>. Após extrair, limpar e transformar os dados, foram criadas tabelas de fatos e dimensões. E também foi criada, em linguagem M, uma tabela <span>dimensão calendário</span>, que possibilita centralizar as datas, permitindo melhor consistência nas análises ao trabalhar com funções de inteligência de tempo.</p>
+                    <p>A modelagem foi feita usando o <span>esquema estrela</span> (ver figura ao lado), no qual a <span>tabela fato</span>, quem contém os valores, pode ser filtrada pelas <span>tabelas dimensão</span>, que trazem os contextos.</p>
+                    <br>
+                    <p>É possível notar que tabela fato só se relaciona com tabela dimensão e vice-versa. O relacionamento entre as tabelas é de um para muitos (1:*), com o filtro sempre indo da dimensão para a fato.</p>
+                    Neste projeto não temos tabela ponte (fato sem fato) nem diferença de granularidade que poderia gerar relacionamento muitos para muitos (*:*).
+                </div>
+
+                <div class="column right">
+                    <img src="https://uploaddeimagens.com.br/images/004/368/847/original/modelo.jpg" alt="star schema">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Análises -->
+    <section class="analysis" id="analisys">
+        <div class="max-width">
+            <h2 class="title">Análise de Dados</h2>
+            <div class="analysis-content">
+
+                <div class="column center">
+                    <div class="text">Extraindo informações</div>
+                    <p>Foi feita uma <span>análise exploratória</span>, com visuais de gráficos e expressões DAX, para conhecer os dados. Porém as informações extraídas devem ser relevantes para o contexto (projeto). Desta forma, o que está exposto aqui são algumas expressões DAX da <span>análise explanatória</span>.</p>
+                </div>
+
+                <div class="column left">
+                    <p>Coluna esquerda</p>
+                </div>
+                <div class="column right">
+                    <p>Coluna direita</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- relatório -->
+    <section class="report" id="report">
+        <div class="max-width">
+            <h2 class="title">Relatório</h2>
+            <div class="report-content">
+                <div class="column center">
+                    <div class="box">
+                        <iframe title="Dash Vendas" width="800" height="510" src="https://app.powerbi.com/view?r=eyJrIjoiNzAzMmE1ZmEtNzk0Ni00YjBhLWIzYTUtMDEzODA2NDQ1MGRhIiwidCI6ImUzYTc5NjE2LWVhZTktNDFkNC1iNDIzLWI1NmY0MTk1YjJjMiJ9" frameborder="0" allowFullScreen="true"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
