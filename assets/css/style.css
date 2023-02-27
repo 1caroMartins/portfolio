@@ -797,11 +797,18 @@ section .title::after{
 }
 
 /*página projeto */
-.objective, .modeling, .report{
+.report, .objective, .analysis, .modeling{
+    padding: 30px 0;
     margin-bottom: 3rem;
     font-family: 'Roboto', sans-serif;
 }
-.objective{
+.report .title::before{
+    width: 235px;
+}
+.report .title::after{
+    content: "visualização de dados";
+}
+.objective, .modeling{
     background: #e9e9e9;
 }
 .objective .title::before{
@@ -811,32 +818,53 @@ section .title::after{
     content: "objetivos e fórmulas";
     background: #e9e9e9;
 }
+.analysis .title::before{
+    width: 320px;
+}
+.analysis .title::after{
+    content: "conhecendo os dados";
+}
 .modeling .title::before{
     width: 330px;
 }
 .modeling .title::after{
     content: "preparando os dados";
+    background: #e9e9e9;
 }
-.report .title::before{
-    width: 235px;
-}
-.report .title::after{
-    content: "visualização de dados";
-}
+.report .report-content,
 .objective .objective-content,
-.modeling .modeling-content,
-.report .report-content{
+.analysis .analysis-content,
+.modeling .modeling-content{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+}
+.report .report-content .center{
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+.report .report-content .center .box{
+    height: 450px;
+    overflow: hidden;
+}
+.report .report-content .center .desc{
+    text-align: justify;
+    font-style: italic;
+}
+.report .report-content .center a{
+    width: 100%;
+    color: #118DFF;
+    font-weight: 600;
+    text-align: center;
 }
 .objective .objective-content .left,
 .objective .objective-content .right{
     width: calc(45% - 10px);
     margin: 0 5px;
     display: block;
-    height: 100vh !important;
+    height: 90vh !important;
 }
 .objective .objective-content .left .text{
     font-size: 25px;
@@ -858,6 +886,30 @@ section .title::after{
     font-weight: 600;
     margin-bottom: 10px;
 }
+.analysis .analysis-content .center{
+    display: block;
+    width: 100%;
+    text-align: justify;
+}
+.analysis .analysis-content .center .text{
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.analysis .analysis-content .center span{
+    color: #118DFF;
+    font-weight: 600;
+}
+.analysis .analysis-content .cente p{
+    text-align: justify;
+}
+.analysis .analysis-content .left,
+.analysis .analysis-content .right{
+    width: calc(45% - 10px);
+    margin: 0 5px;
+    display: block;
+    /*height: 100vh !important;*/
+}
 .modeling .modeling-content .left{
     width: calc(35% - 10px);
     margin: 0 5px;
@@ -873,7 +925,7 @@ section .title::after{
 }
 .modeling .modeling-content .left span{
     color: #118DFF;
-    font-weight: 500;
+    font-weight: 600;
 }
 .modeling .modeling-content .right{
     width: calc(50% - 10px);
@@ -886,15 +938,6 @@ section .title::after{
     width: 530px;
     object-fit: cover;
     border-radius: 6px;
-} 
-.report .report-content .center{
-    display: block;
-    width: 100%;
-    text-align: center;
-}
-.report .report-content .center .box{
-    height: 450px;
-    overflow: hidden;
 }
 /* Sessão rodapé estilo */
 footer{

@@ -14,6 +14,25 @@
         <a href="index.html"><i class="fa fa-arrow-left"></i></a>
     </div>
     
+    <!-- relatório -->
+    <section class="report" id="report">
+        <div class="max-width">
+            <h2 class="title">Relatório</h2>
+            <div class="report-content">
+                <div class="column center">
+                    
+                    <div class="box">
+                        <iframe title="Dash Vendas" width="800" height="510" src="https://app.powerbi.com/view?r=eyJrIjoiNzAzMmE1ZmEtNzk0Ni00YjBhLWIzYTUtMDEzODA2NDQ1MGRhIiwidCI6ImUzYTc5NjE2LWVhZTktNDFkNC1iNDIzLWI1NmY0MTk1YjJjMiJ9" frameborder="0" allowFullScreen="true"></iframe>
+                    </div>
+                    <br>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiNzAzMmE1ZmEtNzk0Ni00YjBhLWIzYTUtMDEzODA2NDQ1MGRhIiwidCI6ImUzYTc5NjE2LWVhZTktNDFkNC1iNDIzLWI1NmY0MTk1YjJjMiJ9"><p>Link do Relatório</p></a>
+                    <br>
+                    <p class="desc">No Power BI, para explorar as potencialidades da ferramenta, foram utilizados recursos como tooltip, drill down, drill through e bookmarks, além de seus filtros e visuais nativos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- objetivo -->
     <section class="objective" id="objective">
         <div class="max-width">
@@ -52,12 +71,55 @@
                 <div class="column right">
                     <div class="text">Definições da área</div>
                     <ul>
-                        <p>KPI 1</p>
-                        <li>Fórmula 1</li>
+                        <p>Clientes recorrentes:</p>
+                        <li>Clientes que compraram no mês corrente e no mês anterior.</li>
                         <br>
-                        <p>KPI 2</p>
-                        <li>Fórmula 2</li>
+                        <p>Ticket Médio (com base no número de vendas):</p>
+                        <br>
+                        <li>
+                            <math>
+                                <mi>TMv</mi><mo>=</mo>
+                                <mfrac>
+                                    <mrow><mn>Faturamento</mn></mrow>
+                                    <mn>Número de vendas realizadas no período</mn>
+                                </mfrac>
+                            </math>
+                        </li>
+                        <br>
+                        <p>Ticket Médio (com base no número de clientes):</p>
+                        <br>
+                        <li>
+                            <math>
+                                <mi>TMc</mi><mo>=</mo>
+                                <mfrac>
+                                    <mrow><mn>Faturamento</mn></mrow>
+                                    <mn>Número de clientes que compraram no período</mn>
+                                </mfrac>
+                            </math>
+                        </li>
                     </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Análises -->
+    <section class="analysis" id="analisys">
+        <div class="max-width">
+            <h2 class="title">Análise de Dados</h2>
+            <div class="analysis-content">
+
+                <div class="column center">
+                    <div class="text">Extraindo informações</div>
+                    <p>Foi feita uma <span>análise exploratória</span>, com visuais de gráficos e expressões DAX, para conhecer os dados. Porém as informações extraídas devem ser relevantes para o contexto (projeto). Desta forma, o que está exposto aqui são algumas expressões DAX da <span>análise explanatória</span>.</p>
+                </div>
+
+                <div class="column left">
+                    <p>Coluna esquerda</p>
+                </div>
+                <div class="column right">
+                    <p>Coluna direita</p>
                 </div>
 
             </div>
@@ -87,41 +149,10 @@
         </div>
     </section>
 
-    <!-- Análises -->
-    <section class="analysis" id="analisys">
-        <div class="max-width">
-            <h2 class="title">Análise de Dados</h2>
-            <div class="analysis-content">
-
-                <div class="column center">
-                    <div class="text">Extraindo informações</div>
-                    <p>Foi feita uma <span>análise exploratória</span>, com visuais de gráficos e expressões DAX, para conhecer os dados. Porém as informações extraídas devem ser relevantes para o contexto (projeto). Desta forma, o que está exposto aqui são algumas expressões DAX da <span>análise explanatória</span>.</p>
-                </div>
-
-                <div class="column left">
-                    <p>Coluna esquerda</p>
-                </div>
-                <div class="column right">
-                    <p>Coluna direita</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- relatório -->
-    <section class="report" id="report">
-        <div class="max-width">
-            <h2 class="title">Relatório</h2>
-            <div class="report-content">
-                <div class="column center">
-                    <div class="box">
-                        <iframe title="Dash Vendas" width="800" height="510" src="https://app.powerbi.com/view?r=eyJrIjoiNzAzMmE1ZmEtNzk0Ni00YjBhLWIzYTUtMDEzODA2NDQ1MGRhIiwidCI6ImUzYTc5NjE2LWVhZTktNDFkNC1iNDIzLWI1NmY0MTk1YjJjMiJ9" frameborder="0" allowFullScreen="true"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!--rodapé início-->
+    <footer>
+        <span>Criado por <a href="https://github.com/1caroMartins" target="_blank">Icaro Martins</a> | <span class="far fa-copyright"></span> 2023 Todos os direitos reservados.</span>
+    </footer>
 
 </body>
 </html>
