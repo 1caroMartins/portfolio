@@ -852,6 +852,7 @@ section .title::after{
 .report .report-content .center .desc{
     text-align: justify;
     font-style: italic;
+    padding: 0 100px;
 }
 .report .report-content .center a{
     width: 100%;
@@ -866,7 +867,7 @@ section .title::after{
     display: block;
     height: 90vh !important;
 }
-.objective .objective-content .left .text{
+.objective .objective-content .text{
     font-size: 25px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -881,34 +882,35 @@ section .title::after{
 .objective .objective-content .left p{
     color: #818181;
 }
-.objective .objective-content .right .text{
-    font-size: 25px;
+.objective .objective-content .right li{
+    color: #118DFF;
     font-weight: 600;
-    margin-bottom: 10px;
 }
 .analysis .analysis-content .center{
     display: block;
     width: 100%;
     text-align: justify;
+    padding-bottom: 30px;
 }
 .analysis .analysis-content .center .text{
     font-size: 25px;
     font-weight: 600;
     margin-bottom: 10px;
 }
-.analysis .analysis-content .center span{
+.analysis .analysis-content span{
     color: #118DFF;
     font-weight: 600;
 }
 .analysis .analysis-content .cente p{
     text-align: justify;
+    padding: 0 100px;
 }
 .analysis .analysis-content .left,
 .analysis .analysis-content .right{
-    width: calc(45% - 10px);
+    width: calc(40% - 10px);
     margin: 0 5px;
     display: block;
-    /*height: 100vh !important;*/
+    height: 350vh !important;
 }
 .modeling .modeling-content .left{
     width: calc(35% - 10px);

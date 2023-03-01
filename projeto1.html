@@ -27,7 +27,7 @@
                     <br>
                     <a href="https://app.powerbi.com/view?r=eyJrIjoiNzAzMmE1ZmEtNzk0Ni00YjBhLWIzYTUtMDEzODA2NDQ1MGRhIiwidCI6ImUzYTc5NjE2LWVhZTktNDFkNC1iNDIzLWI1NmY0MTk1YjJjMiJ9"><p>Link do Relatório</p></a>
                     <br>
-                    <p class="desc">No Power BI, para explorar as potencialidades da ferramenta, foram utilizados recursos como tooltip, drill down, drill through e bookmarks, além de seus filtros e visuais nativos.</p>
+                    <p class="desc">No Power BI, para explorar as potencialidades da ferramenta, foram utilizados recursos como tooltip, drill down, parâmetros, drill through e bookmarks, além de seus filtros e visuais nativos.</p>
                 </div>
             </div>
         </div>
@@ -71,24 +71,24 @@
                 <div class="column right">
                     <div class="text">Definições da área</div>
                     <ul>
-                        <p>Clientes recorrentes:</p>
-                        <li>Clientes que compraram no mês corrente e no mês anterior.</li>
+                        <li>Clientes recorrentes:</li>
+                        <p>Clientes que compraram no período corrente (mês ou ano) e no período anterior.</p>
                         <br>
-                        <p>Ticket Médio (com base no número de vendas):</p>
+                        <li>Lifetime Médio:</li><p> Tempo de retenção, ou seja, tempo médio que os clientes mantêm ativo o relacionamento com a empresa.</p>
                         <br>
-                        <li>
+                        <p>
                             <math>
-                                <mi>TMv</mi><mo>=</mo>
+                                <mi>Lifetime Médio</mi><mo>=</mo>
                                 <mfrac>
-                                    <mrow><mn>Faturamento</mn></mrow>
-                                    <mn>Número de vendas realizadas no período</mn>
+                                    <mrow><mn>Soma dos tempos entre s primeira e última compras de cada cliente</mn></mrow>
+                                    <mn>Número de clientes que compraram no mês corrente</mn>
                                 </mfrac>
                             </math>
-                        </li>
+                        </p>
                         <br>
-                        <p>Ticket Médio (com base no número de clientes):</p>
+                        <li>Ticket Médio (com base no número de clientes):</li>
                         <br>
-                        <li>
+                        <p>
                             <math>
                                 <mi>TMc</mi><mo>=</mo>
                                 <mfrac>
@@ -96,7 +96,19 @@
                                     <mn>Número de clientes que compraram no período</mn>
                                 </mfrac>
                             </math>
-                        </li>
+                        </p>
+                        <br>
+                        <li>Ticket Médio (com base no número de vendas):</li>
+                        <br>
+                        <p>
+                            <math>
+                                <mi>TMv</mi><mo>=</mo>
+                                <mfrac>
+                                    <mrow><mn>Faturamento</mn></mrow>
+                                    <mn>Número de vendas realizadas no período</mn>
+                                </mfrac>
+                            </math>
+                        </p>
                     </ul>
                 </div>
 
@@ -112,14 +124,283 @@
 
                 <div class="column center">
                     <div class="text">Extraindo informações</div>
-                    <p>Foi feita uma <span>análise exploratória</span>, com visuais de gráficos e expressões DAX, para conhecer os dados. Porém as informações extraídas devem ser relevantes para o contexto (projeto). Desta forma, o que está exposto aqui são algumas expressões DAX da <span>análise explanatória</span>.</p>
+                    <p>Foi feita uma <span>análise exploratória</span>, com visuais de gráficos e expressões DAX, para conhecer os dados. Porém as informações extraídas devem ser relevantes para o contexto (projeto). Desta forma, o que está exposto aqui são algumas expressões da <span>análise explanatória</span>.</p>
                 </div>
 
                 <div class="column left">
-                    <p>Coluna esquerda</p>
+                    <p>Medida do Faturamento:</p>
+                    <pre>
+Faturamento = 
+SUMX(
+    fNotas,
+    fNotas[Quantidade] * fNotas[Preço unitário]
+)
+                    </pre>
+                    <p>Medida do Faturamento <span>YoY</span> (Year-over-Year), no qual ao filtrar um ano, ele é comparado com ano anterior, e ao filtrar mais de um ano, a comparação é feita entre os dois últimos anos selecionados no filtro:</p>
+                    <pre>
+Faturamento YoY = 
+// ano do contexto
+VAR vAno_maximo = MAX(dCalendario[Ano])
+// ano anterior de acordo com o filtro
+VAR vAno_anterior = 
+IF(
+    COUNTROWS(VALUES(dCalendario[Ano])) > 1,
+        CALCULATE(
+            MAX(dCalendario[Ano]),
+            FILTER(
+                VALUES(dCalendario[Ano]),
+                dCalendario[Ano] < vAno_maximo
+            )
+        ),
+        vAno_maximo - 1
+)
+//Menor ano
+VAR vMenor_ano = CALCULATE(MIN(dCalendario[Ano]), ALL(dCalendario[Ano]))
+//Faturamento no contexto
+VAR vValor_ultimo_ano = 
+CALCULATE(
+    [Faturamento],
+    dCalendario[Ano] = vAno_maximo
+)
+//Faturamento no ano anterior
+VAR vValor_ano_anterior = 
+CALCULATE(
+    [Faturamento],
+    dCalendario[Ano] = vAno_anterior
+)
+//Mostrar YoY se o ano não for o menor
+VAR vResultado = 
+IF(
+    vAno_anterior >= vMenor_ano, 
+        DIVIDE(
+            vValor_ultimo_ano - vValor_ano_anterior,
+            vValor_ano_anterior
+        ),
+        "-"
+)
+RETURN
+vResultado
+                    </pre>
+                    <p>Medida do Faturamento <span>MoM</span> (Month-over-Month), no qual ao filtrar um mês, ele é comparado com mês anterior, e ao filtrar mais de um mês, a comparação é feita entre os dois últimos meses selecionados no filtro:</p>
+                    <pre>
+MoM Faturamento = 
+//Encontrar último ano do contexto:
+VAR vAno_maximo = MAX('dCalendario'[Ano])
+//Encontrar último mês do contexto:
+var vUltimo_mes = MAX('dCalendario'[Mês])
+//Calcular Faturamento no último mês do contexto:
+var vValor_mes_contexto = 
+CALCULATE(
+    [Faturamento],
+    dCalendario[Mês] = vUltimo_mes,
+    dCalendario[Ano] = vAno_maximo
+)
+//Calcular Faturamento no mês anterior:
+var vValor_mes_anterior =
+SWITCH(
+    TRUE(),
+    COUNTROWS(VALUES('dCalendario'[Ano])) = 1 && COUNTROWS(VALUES('dCalendario'[Mês])) = 1,
+        CALCULATE(
+            [Faturamento],
+            PARALLELPERIOD(dCalendario[Data], -1, MONTH)
+        ),
+    COUNTROWS(VALUES('dCalendario'[Ano])) = 1 && COUNTROWS(VALUES('dCalendario'[Mês])) > 1,
+        CALCULATE(
+            [Faturamento],
+            FILTER(
+                VALUES(dCalendario[Mês]),
+                dCalendario[Mês] < vUltimo_mes
+            )
+        ),
+    CALCULATE(
+        [Faturamento],
+        FILTER(
+            VALUES(dCalendario[Ano]),
+            dCalendario[Ano] < vAno_maximo
+        ),
+        FILTER(
+            VALUES(dCalendario[Mês]),
+            dCalendario[Mês] = vUltimo_mes
+        )
+    )
+)
+//Mostrar resultado se houver ano e mês filtrados
+VAR vResultado =
+IF(
+    COUNTROWS(VALUES(dCalendario[Ano])) < COUNTROWS(ALL(dCalendario[Ano])) &&
+    COUNTROWS(VALUES(dCalendario[Mês])) < COUNTROWS(ALL(dCalendario[Mês])),
+        DIVIDE(
+            vValor_mes_contexto - vValor_mes_anterior,
+            vValor_mes_anterior
+        ),
+        "-"
+)
+RETURN
+vResultado
+                    </pre>
+                    <p>Medida do número de vendas (número de Notas Fiscais):</p>
+                    <pre>NF = DISTINCTCOUNT(fNotas[NF])
+                    </pre>
+                    <p>Medida do <span>Ticket Médio</span> (com base no número de Vendas):</p>
+                    <pre>TMv = DIVIDE([Faturamento], [NF])
+                    </pre>
+                    <p>Medida para calcular o Faturamento percentual acumulado por produto (utilizado no <span>gráfico de Pareto</span>):</p>
+                    <pre>
+Pareto = 
+//Retirar o contexto de filtro de produto
+VAR vTotal_fat = 
+CALCULATE(
+    [Faturamento],
+    ALLSELECTED(dProdutos[Produto])
+)
+//Faturamento total de cada produto
+VAR vTot_atual = [Faturamento]
+//Tabela de vendas agrupada por produto e seu faturamento
+VAR vTabela =
+SUMMARIZE(
+    ALLSELECTED(fNotas),
+    dProdutos[Produto],
+    "Total", [Faturamento]
+)
+// Acumular valores da tabela
+VAR vTotal_acum =
+SUMX(
+    FILTER(
+        vTabela,
+        [Total] >= vTot_atual
+    ),
+    [Total]
+)
+RETURN
+//percentual acumulado
+DIVIDE(vTotal_acum, vTotal_fat)
+                    </pre>
                 </div>
                 <div class="column right">
-                    <p>Coluna direita</p>
+                    <p>Medida para calcular os N Produtos mais vendidos</p>
+                    <pre>
+Top Produtos mais vendidos = 
+//Ranquear produtos pelo faturamento
+VAR vRanking =
+RANKX(
+    ALL(dProdutos[Produto]),
+    [Qtd Produtos vendidos]
+)
+// Mostrar somente os N primeiros produtos
+VAR vResultado = 
+IF(
+    vRanking <= [Top N Produtos Valor],
+        [Qtd Produtos vendidos]
+)
+RETURN
+vResultado 
+                    </pre>
+                    <p>Medida dos Clientes que já realizaram ao menos uma compras:</p>
+                    <pre>Qtd Clientes = DISTINCTCOUNT(fNotas[IDCliente])
+                    </pre>
+                    <p>Medida do <span>Ticket Médio</span> (com base no número de Clientes):</p>
+                    <pre>TMc = DIVIDE([Faturamento], DISTINCTCOUNT(fNotas[IDCliente]))
+                    </pre>
+                    <p>Medida de <span>Novos Clientes</span>:</p>
+                    <pre>
+Novos Clientes = 
+//Tabela de clientes que já efetuaram compras
+VAR vClientes_contexto = VALUES(fNotas[IDCliente])
+-- Para mês
+VAR vData_limite =
+EOMONTH(
+    MAX(dCalendario[Data]),
+    -1
+)
+//Tabela de clientes que fizeram compras até o mês anterior
+VAR vClientes_antigos = 
+CALCULATETABLE(
+    VALUES(fNotas[IDCliente]),
+    dCalendario[Data] <= vData_limite
+)
+//Tabela de novos clientes no mês atual
+VAR vTb_novos_clientes =
+EXCEPT(
+    vClientes_contexto,
+    vClientes_antigos
+)
+//Quantidade de novos clientes no mês
+VAR vNovos_clientes = COUNTROWS(vTb_novos_clientes)
+-- Para o ano:
+VAR vAno_contexto = MAX(dCalendario[Ano])
+//Tabela de clientes que fizeram compras no ano anterior
+VAR vClientes_anos_anteriores = 
+CALCULATETABLE(
+    VALUES(fNotas[IDCliente]),
+    dCalendario[Ano] < vAno_contexto
+)
+//Tabela de novos clientes no ano atual
+VAR vTb_novos_clientes_ano =
+EXCEPT(
+    vClientes_contexto,
+    vClientes_anos_anteriores
+)
+//Quantidade de novos clientes no ano
+VAR vNovos_clientes_ano = COUNTROWS(vTb_novos_clientes_ano)
+//Resultado conforme o contexto
+VAR vResultado =
+
+IF(
+    ISINSCOPE(dCalendario[Mês Abrev]),
+    vNovos_clientes,
+    vNovos_clientes_ano
+)
+RETURN
+vResultado
+                    </pre>
+                    <p>Medida de <span>Clientes Recorrentes</span>:</p>
+                    <pre>Clientes Recorrentes = [Qtd Clientes] - [Novos Clientes]
+                    </pre>
+                    <p>Medida do Lifetime de cada Cliente:</p>
+                    <pre>
+Lifetime = 
+VAR vData_contexto = MAX(dCalendario[Data])
+//Data da primeira compra de cada cliente 
+VAR vData_1a_compra = 
+CALCULATE(
+    MIN(fNotas[Data emissao]),
+    ALL(dCalendario)
+)
+//Tempo em qua cada comprador do mês atual é cliente:
+VAR vTempo_cliente = 
+IF(
+    [Faturamento],
+    DATEDIFF(vData_1a_compra, vData_contexto, MONTH) +1
+)
+RETURN
+vTempo_cliente
+                    </pre>
+                    <p>Medida do <span>Lifetime Médio</span>:</p>
+                    <pre>
+Lifetime Medio = 
+AVERAGEX(
+    VALUES(fNotas[IDCliente]),
+    [Lifetime]
+)
+                    </pre>
+                    <p>Medida para calcular os 3 clientes que geram maior faturamento:</p>
+                    <pre>
+Top 3 Clientes = 
+//Ranquear clientes pelo Faturamento
+VAR vRanking_clientes =
+RANKX(
+    ALL(dClientes[Nome cliente]),
+    [Faturamento]
+)
+//Mostrar apenas os 3 primeiros
+VAR vResultado =
+IF(
+    vRanking_clientes <= 3,
+    [Faturamento]
+)
+RETURN
+vResultado 
+                    </pre>
                 </div>
 
             </div>
