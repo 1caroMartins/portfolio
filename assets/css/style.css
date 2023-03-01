@@ -848,6 +848,7 @@ section .title::after{
 .report .report-content .center .box{
     height: 450px;
     overflow: hidden;
+    animation: MoveItem 0.7s forwards;
 }
 .report .report-content .center .desc{
     text-align: justify;
@@ -864,7 +865,6 @@ section .title::after{
 .objective .objective-content .right{
     width: calc(45% - 10px);
     margin: 0 5px;
-    display: block;
     height: 90vh !important;
 }
 .objective .objective-content .text{
@@ -907,10 +907,24 @@ section .title::after{
 }
 .analysis .analysis-content .left,
 .analysis .analysis-content .right{
-    width: calc(40% - 10px);
+    width: calc(45% - 10px);
     margin: 0 5px;
     display: block;
-    height: 350vh !important;
+    height: 405vh !important;
+}
+.analysis .analysis-content .left p,
+.analysis .analysis-content .right p{
+    margin-bottom: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #f8f8f8;
+}
+.analysis .analysis-content pre{
+    width: 100%;
+    padding: 10px;
+    white-space:pre-wrap;
+    background: #f6f9ff;
+    border-radius: 6px;
+    margin-bottom: 15px;
 }
 .modeling .modeling-content .left{
     width: calc(35% - 10px);
