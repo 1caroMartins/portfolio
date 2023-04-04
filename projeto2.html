@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <title>Projeto 2</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/keyframes.css">
+</head>
+<body>
+    <div class="back">
+        <a href="index.html"><i class="fa fa-arrow-left"></i></a>
+    </div>
+    
+    <!-- relatório -->
+    <section class="report" id="report">
+        <div class="max-width">
+            <h2 class="title">Relatório</h2>
+            <div class="report-content">
+                <div class="column center">
+                    
+                    <div class="box">
+                        <iframe title="Dash Compras" width="800" height="510" src="https://app.powerbi.com/view?r=eyJrIjoiZTg4NDY2YzctMWFkMy00MjZjLTk1MjQtY2Q4MzY0NmMwMDcxIiwidCI6ImUzYTc5NjE2LWVhZTktNDFkNC1iNDIzLWI1NmY0MTk1YjJjMiJ9" frameborder="0" allowFullScreen="true"></iframe>
+                    </div>
+                    <br>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZTg4NDY2YzctMWFkMy00MjZjLTk1MjQtY2Q4MzY0NmMwMDcxIiwidCI6ImUzYTc5NjE2LWVhZTktNDFkNC1iNDIzLWI1NmY0MTk1YjJjMiJ9"><p>Link do Relatório</p></a>
+                    <br>
+                    <p class="desc">Este relatório foi feito, inteiramente com recursos nativos do Power BI, utilizando uma base de dados real, porém alterada para proteger os dados da fonte. E foram utilizadas tabelas auxiliares para melhorar a visualização de dados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- objetivo -->
+    <section class="objective" id="objective">
+        <div class="max-width">
+            <h2 class="title">Requisitos</h2>
+            <div class="objective-content">
+
+                <div class="column left">
+                    <div class="text">O que foi pedido</div>
+                    <ul>
+                        <p>Página única</p>
+                        <li>Cartões com Custo total em compras, Lead time médio, Atraso médio e Saving%, sempre comparando com o ano anterior;</li>
+                        <li>Percentual de pedidos entregues na meta e fora da meta por mês;</li>
+                        <li>Comparação entre o percentual de saving dos compradores, destacando o melhor comprador;</li>
+                        <li>Quantidade de pedidos requisitados comparado com a quantidade de pedidos entregues por mês;</li>
+                        <li>O comportamento do custo total em compras dos últimos 12 meses em relação ao mês filtrado, destacando os meses com maior e menor custo;</li>
+                        <li>Percentual de participação no custo total das top 3 matérias primas, exibindo também o percentual de todo o restante.</li>
+                    </ul>
+                </div>
+
+                <div class="column right">
+                    <div class="text">Definições da área</div>
+                    <ul>
+                        <li>Custo Total:</li>
+                        <p> &sum; (quantidade x custo unitário)</p>
+                        <br>
+                        <li>Lead Time:</li>
+                        <p> Média dos tempos de entrega, na qual o tempo de entrega é a diferença, em dias úteis, entre a data da requisição e a data da entrega. Obs.: O dia da requisição não conta.</p>
+                        <br>
+                        <li>Atraso Médio:</li>
+                        <br>
+                        <p>Média de dias que excederam a meta (em dias) para entrega.</p>
+                        <br>
+                        <li>Saving %:</li>
+                        <br>
+                        <p>
+                            <math>
+                                <mi>Saving %</mi><mo>=</mo>
+                                <mfrac>
+                                    <mrow><mn>Custo Total Padrão - Custo Total</mn></mrow>
+                                    <mn>Custo Total Padrão</mn>
+                                </mfrac>
+                            </math>
+                        </p>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Análises -->
+    <section class="analysis" id="analisys">
+        <div class="max-width">
+            <h2 class="title">Análise de Dados</h2>
+            <div class="analysis-content">
+
+                <div class="column center">
+                    <div class="text">Extraindo informações</div>
+                    <p>Foi feita uma <span>análise exploratória</span>, com visuais de gráficos e expressões DAX, para conhecer os dados. Porém as informações extraídas devem ser relevantes para o contexto (projeto). Desta forma, o que está exposto aqui são algumas expressões da <span>análise explanatória</span>.</p>
+                </div>
+
+                <div class="column left">
+                    <p>Medida do <span>Custo Total</span>:</p>
+                    <pre>
+SUMX(
+    fCompras,
+    fCompras[Quantidade] * fCompras[CustoUnitario]
+)
+                    </pre>
+                    <p>Custo Total LY (Last Year)</p>
+                    <pre>
+CALCULATE(
+    [Custo Total Efetivo],
+    SAMEPERIODLASTYEAR(dCalendario[Data])
+)
+                    </pre>
+                    <p>Custo Total <span>YoY</span> (Year-over-Year), no qual ao filtrar um ano, ele é comparado com ano anterior:</p>
+                    <pre>
+DIVIDE(
+    [Custo Total Efetivo] - [Custo Total LY],
+    [Custo Total LY]
+)
+                    </pre>
+                    <p>Coluna calculada, na tabela fato, de dias úteis entre a data de requisição e a data de entrega</p>
+                    <pre>
+CALCULATE(
+    COUNTROWS(dCalendario),
+    DATESBETWEEN(
+        dCalendario[Data],
+        fCompras[DataRequisicao],
+        fCompras[DataEntrega] -1
+    ),
+    dCalendario[Dia util] = 1
+)
+                    </pre>
+                    <p>Medida de <span>Lead Time Médio</span></p>
+                    <pre>AVERAGE(fCompras[Dias uteis Req-Ent])
+                    </pre>
+                    <p>Medida do <span>Atraso Médio</span>:</p>
+                    <pre>
+VAR vAtraso =
+FILTER(
+    fCompras,
+    DATEDIFF(fCompras[DataSaida], fCompras[DataEntrega], DAY) > fCompras[Meta entrega]
+)
+VAR vResultado =
+AVERAGEX(
+    vAtraso,
+    DATEDIFF(fCompras[DataSaida], fCompras[DataEntrega], DAY) - fCompras[Meta entrega]
+)
+RETURN
+vResultado 
+                    </pre>
+                    <p>Medida do <span>Saving %</span>:</p>
+                    <pre>
+VAR vDiferenca =
+SUMX(
+    fCompras,
+    fCompras[Quantidade] * (fCompras[Custo Padrão] - fCompras[CustoUnitario])
+)
+VAR vTotal_padrao =
+SUMX(
+    fCompras,
+    fCompras[Quantidade] * fCompras[Custo Padrão]
+)
+VAR vResultado = DIVIDE(vDiferenca, vTotal_padrao)
+RETURN
+vResultado
+                    </pre>
+                    <p>Medida de requisições entregues dentro da meta</p>
+                    <pre>
+CALCULATE(
+    COUNTROWS(fCompras),
+    DATEDIFF(fCompras[DataSaida], fCompras[DataEntrega], DAY) <= fCompras[Meta entrega],
+    fCompras[DataEntrega]
+)
+                    </pre>
+                    <p>Medida de requisições entregues fora da meta:</p>
+                    <pre>
+CALCULATE(
+    COUNTROWS(fCompras) - [Requisicoes entregue dentro da meta],
+    fCompras[DataEntrega]
+)
+                    </pre>
+                    <p>Medida para destacar melhor Saving % por comprador:</p>
+                    <pre>
+VAR vRanking =
+RANKX(
+    ALL(dComprador[Comprador]),
+    [Saving %]
+)
+VAR vResultado = 
+IF(
+    vRanking = 1,
+        1,
+        0
+)
+RETURN
+vResultado
+                    </pre>
+                </div>
+                <div class="column right">
+                    <p>Medida para criar tabela auxiliar de matéria-prima com a categoria "outros":</p>
+                    <pre>
+UNION(
+    ALL('dMateria Prima'[idMateriaPrima], 'dMateria Prima'[MateriaPrima]),
+    {("99999","Outros")}
+)
+                    </pre>
+                    <p>Medida para agrupar o Custo Total na categoria "outros" (fora do Top 3 matérias-primas), utilizando uma tabela auxiliar:</p>
+                    <pre>
+VAR vN = 3
+VAR vCusto_outros =
+IF(
+    SELECTEDVALUE('Materia Prima Outros'[MateriaPrima]) = "Outros",
+        CALCULATE(
+            [Custo Total Efetivo],
+            FILTER(
+                ALL('Materia Prima Outros'[MateriaPrima]),
+                [Ranking MP] > vN
+            ),
+            USERELATIONSHIP('Materia Prima Outros'[idMateriaPrima], fCompras[idMateriaPrima])
+        )
+)
+VAR vResultado =
+IF(
+    [Ranking MP] <= vN,
+        CALCULATE(
+            [Custo Total Efetivo],
+            USERELATIONSHIP('Materia Prima Outros'[idMateriaPrima], fCompras[idMateriaPrima])
+        ),
+    vCusto_outros
+)
+RETURN
+vResultado
+                    </pre>
+                    <p>Medida para calcular o Custo Total dos últimos 12 meses, utilizando uma tabela calendário auxiliar no eixo do gráfico:</p>
+                    <pre>
+VAR vN = 12
+VAR vData_filtro = CALCULATE(MAX(dCalendario[Data]), dCalendario[Incluir no filtro] = 1)
+VAR vPeriodo =
+DATESINPERIOD(
+    dcalendario_aux[Data],
+    vData_filtro,
+    - vN,
+    MONTH
+)
+VAR vResultado =
+CALCULATE(
+    [Custo Total Efetivo],
+    KEEPFILTERS(vPeriodo),
+    USERELATIONSHIP(dcalendario_aux[Data], fCompras[DataEntrega]),
+    ALL(dCalendario)
+)
+RETURN
+vResultado
+                    </pre>
+                    <p>Medida para destacar o valor máximo e o mínimo dos últimos 12 meses:</p>
+                    <pre>
+Destacar MaxMin mes = 
+VAR vMaximo =
+CALCULATE(
+    MAXX(
+        ALL(dcalendario_aux[Mês-Ano]),
+        [Custo total 12M]
+    ),
+    ALL(dcalendario_aux)
+)
+VAR vMinimo = 
+CALCULATE(
+    MINX(
+        ALL(dcalendario_aux[Mês-Ano]),
+        [Custo total 12M]
+    ),
+    ALL(dcalendario_aux)
+)
+VAR vResultado =
+SWITCH(
+    TRUE(),
+    [Custo total 12M] = vMaximo, 0,
+    [Custo total 12M] = vMinimo, 1,
+    2
+)
+RETURN
+vResultado
+                    </pre>
+                    <p>Medida de quantidade de pedidos entregues:</p>
+                    <pre>COUNTROWS(fCompras)</pre>
+                    <p>Medida de quantidade de pedidos requisitados:</p>
+                    <pre>
+CALCULATE(
+    [Qtd Pedidos entregues],
+    USERELATIONSHIP(dCalendario[Data], fCompras[DataRequisicao])
+)
+                    </pre>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ETL e Modelagem -->
+    <section class="modeling" id="modeling">
+        <div class="max-width">
+            <h2 class="title">ETL e Modelagem</h2>
+            <div class="modeling-content">
+
+                <div class="column left">
+                    <div class="text">Relacionamento entre as tabelas</div>
+                    <p>O processo de <span>ETL</span> deste projeto foi feito inteiramente em <span>Power Query</span>. Após extrair, limpar e transformar os dados, foram criadas tabelas de fatos e dimensões. E também foi criada, em linguagem M, uma tabela <span>dimensão calendário</span>, que possibilita centralizar as datas, permitindo melhor consistência nas análises ao trabalhar com funções de inteligência de tempo.</p>
+                    <p>A modelagem foi feita usando o <span>esquema estrela</span> (ver figura ao lado), no qual a <span>tabela fato</span>, quem contém os valores, pode ser filtrada pelas <span>tabelas dimensão</span>, que trazem os contextos. É possível notar que tabelas auxiliares foram criadas e relacionadas, porém seus relacionamentos estão inativos (podendo serem ativados com medidas DAX).</p>
+                    <br>
+                    <p>Também é possível perceber que tabela fato só se relaciona com tabela dimensão e vice-versa. O relacionamento entre as tabelas é de um para muitos (1:*), com o filtro sempre indo da dimensão para a fato.</p>
+                    Neste projeto não temos tabela ponte (fato sem fato) nem diferença de granularidade que poderia gerar relacionamento muitos para muitos (*:*).
+                </div>
+
+                <div class="column right2">
+                    <img src="https://uploaddeimagens.com.br/images/004/417/519/full/modelo.jpg" alt="star schema">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!--rodapé início-->
+    <footer>
+        <span>Criado por <a href="https://github.com/1caroMartins" target="_blank">Icaro Martins</a> | <span class="far fa-copyright"></span> 2023 Todos os direitos reservados.</span>
+    </footer>
+
+</body>
+</html>

@@ -836,7 +836,7 @@ section .title::after{
 .modeling .modeling-content{
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: Top;
     justify-content: space-between;
 }
 .report .report-content .center{
@@ -865,7 +865,7 @@ section .title::after{
 .objective .objective-content .right{
     width: calc(45% - 10px);
     margin: 0 5px;
-    height: 90vh !important;
+    height: 100% !important;
 }
 .objective .objective-content .text{
     font-size: 25px;
@@ -910,7 +910,7 @@ section .title::after{
     width: calc(45% - 10px);
     margin: 0 5px;
     display: block;
-    height: 410vh !important;
+    height: 100% !important;
 }
 .analysis .analysis-content .left p,
 .analysis .analysis-content .right p{
@@ -952,6 +952,12 @@ section .title::after{
 .modeling .modeling-content .right img{
     height: 400px;
     width: 530px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.modeling .modeling-content .right2 img{
+    height: 300px;
+    width: 660px;
     object-fit: cover;
     border-radius: 6px;
 }
