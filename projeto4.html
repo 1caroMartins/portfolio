@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <title>Projeto 4</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/keyframes.css">
+</head>
+<body>
+    <div class="back">
+        <a href="index.html"><i class="fa fa-arrow-left"></i></a>
+    </div>
+    
+    <!-- relatório -->
+    <section class="report" id="report">
+        <div class="max-width">
+            <h2 class="title">Relatório</h2>
+            <div class="report-content">
+                <div class="column center">
+                    
+                    <div class="box">
+                        <iframe title="Dash Vendas Veículos" width="800" height="510" src="https://app.powerbi.com/view?r=eyJrIjoiYzUzNThjNTEtZmI1OC00YzA0LWE5OGUtOGUwZDhmOTk5ZjA2IiwidCI6ImUzYTc5NjE2LWVhZTktNDFkNC1iNDIzLWI1NmY0MTk1YjJjMiJ9" frameborder="0" allowFullScreen="true"></iframe>
+                    </div>
+                    <br>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiYzUzNThjNTEtZmI1OC00YzA0LWE5OGUtOGUwZDhmOTk5ZjA2IiwidCI6ImUzYTc5NjE2LWVhZTktNDFkNC1iNDIzLWI1NmY0MTk1YjJjMiJ9"><p>Link do Relatório</p></a>
+                    <br>
+                    <p class="desc">Este relatório foi feito, inteiramente com recursos nativos do Power BI, utilizando uma base de dados real, porém alterada para proteger os dados da fonte. Foi usado o recurso de tooltip nos gráficos segmentados por região. E no último gráfico abaixo e à direita também foi utilizado drill through.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- objetivo -->
+    <section class="objective" id="objective">
+        <div class="max-width">
+            <h2 class="title">Requisitos</h2>
+            <div class="objective-content">
+
+                <div class="column left">
+                    <div class="text">O que foi pedido</div>
+                    <ul>
+                        <p>Página única</p>
+                        <li>Deve haver um filtro com as métricas “Faturamento”, “Veículos vendidos” e “Quantidade clientes”, onde o consumidor vai escolher por qual métrica quer analisar o relatório;</li>
+                        <li>Evolução anual e mensal da métrica selecionada pelo consumidor do relatório;</li>
+                        <li>Percentual de participação de cada marca, de acordo com a métrica filtrada;</li>
+                        <li>Top N concessionárias de acordo com a métrica filtrada, exibindo uma linha média. Destaque as que ficaram acima da média;</li>
+                        <li>Valor para cada região do país da métrica filtrada pelo consumidor. Desconsidere região em branco. Para cada região é necessário saber os top 3 modelos de veículos ordenados pela métrica filtrada, o valor da métrica para cada modelo e o valor total dos top 3.</li>
+                    </ul>
+                </div>
+
+                <div class="column right">
+                    <div class="text">Definições da área</div>
+                    <ul>
+                        <li>Faturamento:</li>
+                        <p> &sum; (valores dos veículos vendidos)</p>
+                        <br>
+                        <li>Quantidade de Clientes:</li>
+                        <p> Clientes distintos os quais já efetuaram ao menos uma compra.</p>
+                        <br>
+                        <li>Veículos vendidos:</li>
+                        <br>
+                        <p>Quantidade total de veículos faturados.</p>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Análises -->
+    <section class="analysis" id="analisys">
+        <div class="max-width">
+            <h2 class="title">Análise de Dados</h2>
+            <div class="analysis-content">
+
+                <div class="column center">
+                    <div class="text">Extraindo informações</div>
+                    <p>Foi feita uma <span>análise exploratória</span>, com visuais de gráficos e expressões DAX, para conhecer os dados. Porém as informações extraídas devem ser relevantes para o contexto (projeto). Desta forma, o que está exposto aqui são algumas expressões da <span>análise explanatória</span>.</p>
+                </div>
+
+                <div class="column left">
+                    <p>Medida do <span>Faturamento</span>:</p>
+                    <pre>Faturamento = SUM(fVendas[vlrVeiculo])</pre>
+                    <p>Medida da <span>Quantidade de Clientes</span>:</p>
+                    <pre>Qtd Clientes = DISTINCTCOUNT(fVendas[IDCliente])</pre>
+                    <p>Medida da <span>Quantidade de Veículos Vendidos</span>:</p>
+                    <pre>Veiculos vendidos = COUNTROWS(fVendas)</pre>
+                    <p>Medida do Faturamento <span>YoY</span> (Year-over-Year):</p>
+                    <pre>
+Variação % Faturamento = 
+VAR vMenor_ano = CALCULATE(MIN(dCalendario[Ano]), ALL(dCalendario[Ano]))
+var vUltima_Data = MAX(fVendas[Data])
+var vUltimo_Mes = MONTH(vUltima_Data)
+var vUltimo_Dia_do_Mes = DAY(EOMONTH(vUltima_Data, 0))
+var vUltimo_Ano = YEAR(vUltima_Data)
+var vFaturamento_Ultimo_Ano =
+CALCULATE(
+    [Faturamento],
+    dCalendario[Ano] = vUltimo_Ano
+)
+var vFaturamento_Ano_Anterior_Meses_Equiv =
+CALCULATE(
+    [Faturamento],
+    FILTER(
+        ALL(dCalendario[Data]),
+        dCalendario[Data] >= DATE(vUltimo_Ano-1, 1, 1) &&
+        dCalendario[Data] <= DATE(vUltimo_Ano-1, vUltimo_Mes, vUltimo_Dia_do_Mes)
+    )
+)
+var vResultado =
+DIVIDE(
+    vFaturamento_Ultimo_Ano - vFaturamento_Ano_Anterior_Meses_Equiv,
+    vFaturamento_Ultimo_Ano
+)
+return
+IF(
+    MAX(dCalendario[Ano]) > vMenor_ano,
+        vResultado,
+        "-"
+)
+                    </pre>
+                    <p>Medida das top N concessionárias</p>
+                    <pre>
+Top concessionaria = 
+VAR vN = [Valor Top N concessionárias]
+VAR vRanking = 
+RANKX(
+    ALLSELECTED('dConcessionária'[Concessionária]),
+    SWITCH(
+        SELECTEDVALUE('Métricas'[Métricas Pedido]),
+        0, [Faturamento],
+        1, [Qtd Clientes],
+        [Veiculos vendidos]
+    )
+)
+RETURN
+IF(
+    vRanking <= vN,
+    SWITCH(
+        SELECTEDVALUE('Métricas'[Métricas Pedido]),
+        0, [Faturamento],
+        1, [Qtd Clientes],
+        [Veiculos vendidos]
+    )
+)
+                    </pre>
+                </div>
+                <div class="column right">
+                    <p>Medida da formatação condicional para concessionárias acima da média:</p>
+                    <pre>
+Format cond Top concessionarias = 
+VAR vN = [Valor Top N concessionárias]
+VAR vTabela_TopN = 
+TOPN(
+    vN,
+    ALLSELECTED('dConcessionária'[Concessionária]),
+    SWITCH(
+        SELECTEDVALUE('Métricas'[Métricas Pedido]),
+        0, [Faturamento],
+        1, [Qtd Clientes],
+        [Veiculos vendidos]
+    )
+)
+VAR vMedia_TopN =
+AVERAGEX(
+    vTabela_TopN,
+    SWITCH(
+        SELECTEDVALUE('Métricas'[Métricas Pedido]),
+        0, [Faturamento],
+        1, [Qtd Clientes],
+        [Veiculos vendidos]
+    )
+)
+RETURN
+SWITCH(
+    TRUE(),
+    SELECTEDVALUE('Métricas'[Métricas Pedido]) = 0 && [Faturamento] >= vMedia_TopN, 0,
+    SELECTEDVALUE('Métricas'[Métricas Pedido]) = 1 && [Qtd Clientes] >= vMedia_TopN, 1,
+    SELECTEDVALUE('Métricas'[Métricas Pedido]) = 2 && [Veiculos vendidos] >= vMedia_TopN, 2,
+    3
+)
+                    </pre>
+                    <p>Título do gráfico das top n concessionárias:</p>
+                    <pre>
+Titulo graf top n concessionarias = 
+VAR vMetrica =
+SWITCH(
+    SELECTEDVALUE('Métricas'[Métricas Pedido]),
+    0, "Faturamento (R$)",
+    1, "Clientes",
+    "Vendas de Veículos"
+)
+RETURN
+"Top " & [Valor Top N concessionárias] & " " & vMetrica & " por Concessionária"
+                    </pre>
+                    <p>Medida do top 3 modelos:</p>
+                    <pre>
+Top 3 modelo = 
+VAR vN = 3
+VAR vRanking = 
+RANKX(
+    ALLSELECTED('dVeículos'[Modelo]),
+    SWITCH(
+        SELECTEDVALUE('Métricas'[Métricas Pedido]),
+        0, [Faturamento],
+        1, [Qtd Clientes],
+        [Veiculos vendidos]
+    )
+)
+RETURN
+IF(
+    vRanking <= vN,
+    SWITCH(
+        SELECTEDVALUE('Métricas'[Métricas Pedido]),
+        0, [Faturamento],
+        1, [Qtd Clientes],
+        [Veiculos vendidos]
+    )
+)
+                    </pre>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ETL e Modelagem -->
+    <section class="modeling" id="modeling">
+        <div class="max-width">
+            <h2 class="title">ETL e Modelagem</h2>
+            <div class="modeling-content">
+
+                <div class="column left">
+                    <div class="text">Relacionamento entre as tabelas</div>
+                    <p>O processo de <span>ETL</span> deste projeto foi feito inteiramente em <span>Power Query</span>. Após extrair, limpar e transformar os dados, foram criadas tabelas de fatos e dimensões. E também foi criada, em linguagem M, uma tabela <span>dimensão calendário</span>, que possibilita centralizar as datas, permitindo melhor consistência nas análises ao trabalhar com funções de inteligência de tempo.</p>
+                    <p>A modelagem foi feita usando o <span>esquema estrela</span> (ver figura ao lado), no qual a <span>tabela fato</span>, que contém os valores, pode ser filtrada pelas <span>tabelas dimensão</span>, que trazem os contextos.</p>
+                    <br>
+                    <p>É possível notar que tabela fato só se relaciona com tabela dimensão e vice-versa. O relacionamento entre as tabelas é de um para muitos (1:*), com o filtro sempre indo da dimensão para a fato.</p>
+                    Neste projeto não temos tabela ponte (fato sem fato) nem diferença de granularidade que poderia gerar relacionamento muitos para muitos (*:*).
+                </div>
+
+                <div class="column right4">
+                    <img src="https://uploaddeimagens.com.br/images/004/419/379/full/modelo.jpg" alt="star schema">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!--rodapé início-->
+    <footer>
+        <span>Criado por <a href="https://github.com/1caroMartins" target="_blank">Icaro Martins</a> | <span class="far fa-copyright"></span> 2023 Todos os direitos reservados.</span>
+    </footer>
+
+</body>
+</html>
