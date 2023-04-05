@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <title>Projeto 3</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/keyframes.css">
+</head>
+<body>
+    <div class="back">
+        <a href="index.html"><i class="fa fa-arrow-left"></i></a>
+    </div>
+    
+    <!-- relatório -->
+    <section class="report" id="report">
+        <div class="max-width">
+            <h2 class="title">Relatório</h2>
+            <div class="report-content">
+                <div class="column center">
+                    
+                    <div class="box">
+                        <iframe title="Report Section" width="800" height="510" src="https://app.powerbi.com/view?r=eyJrIjoiZTQ1ZGM5MzgtNjNhMC00MzQ2LTkwOGQtM2MzNjJmYjUyOWI4IiwidCI6ImUzYTc5NjE2LWVhZTktNDFkNC1iNDIzLWI1NmY0MTk1YjJjMiJ9" frameborder="0" allowFullScreen="true"></iframe>
+                    </div>
+                    <br>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZTQ1ZGM5MzgtNjNhMC00MzQ2LTkwOGQtM2MzNjJmYjUyOWI4IiwidCI6ImUzYTc5NjE2LWVhZTktNDFkNC1iNDIzLWI1NmY0MTk1YjJjMiJ9"><p>Link do Relatório</p></a>
+                    <br>
+                    <p class="desc">O Relatório de Comércio Exterior abaixo foi feito, inteiramente com recursos nativos do Power BI, utilizando uma base de dados pública do governo. Há um tooltip ao passar o mouse sobre o gráfico de saldo por UF e um drill through ao selecionar um país no gráfico de top países. E foram utilizadas tabelas auxiliares para melhorar a visualização de dados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- objetivo -->
+    <section class="objective" id="objective">
+        <div class="max-width">
+            <h2 class="title">Requisitos</h2>
+            <div class="objective-content">
+
+                <div class="column left">
+                    <div class="text">Requisitos do projeto</div>
+                    <ul>
+                        <p>Página única</p>
+                        <li>Valores importados, exportados e saldo por período (ano, trimestre, mês);</li>
+                        <li>Saldo por estado e município, evidenciando com cores diferentes os saldos positivos e os negativos;</li>
+                        <li>Para cada estado e município é necessário saber os top 3 grupos com maior saldo da balança, bem como os valores importados e exportados desses grupos;</li>
+                        <li>Valores exportados para os top N países, onde N poderá ser personalizado pelo consumidor do relatório;</li>
+                        <li>Para os países do item anterior, deve ser possível identificar os estados que realizaram exportação para o país, bem como os valores exportados, importados e o saldo;</li>
+                        <li> Os valores estão em dólar. Para o trimestre deve ser possível alternar os valores entre dólar e real.</li>
+                    </ul>
+                </div>
+
+                <div class="column right">
+                    <div class="text">Definições da área</div>
+                    <ul>
+                        <li>Saldo:</li>
+                        <p> Saldo = Exportações - Importações</p>
+                        <br>
+                        <li>Cotação:</li>
+                        <p> Índice (BRL-USD) mensal. Dólar comercial oficial: http://www.yahii.com.br/dolar.html</p>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Análises -->
+    <section class="analysis" id="analisys">
+        <div class="max-width">
+            <h2 class="title">Análise de Dados</h2>
+            <div class="analysis-content">
+
+                <div class="column center">
+                    <div class="text">Extraindo informações</div>
+                    <p>Foi feita uma <span>análise exploratória</span>, com visuais de gráficos e expressões DAX, para conhecer os dados. Porém as informações extraídas devem ser relevantes para o contexto (projeto). Desta forma, o que está exposto aqui são algumas expressões da <span>análise explanatória</span>.</p>
+                </div>
+
+                <div class="column left">
+                    <p>Medida de <span>Exportações</span>:</p>
+                    <pre>Soma Exportacoes = SUM(fExportacao[VL_FOB])</pre>
+                    <p>Medida de <span>Importações</span>:</p>
+                    <pre>Soma Importacoes = SUM(fImportacao[VL_FOB])</pre>
+                    <p>Medida do <span>Saldo</span> da balança comercial:</p>
+                    <pre>Saldo da Balanca = [Soma Exportacoes] - [Soma Importacoes]</pre>
+                    <p>Medida de Exportações LY (Last Year)</p>
+                    <pre>
+Exportacoes LY = 
+CALCULATE(
+    [Soma Exportacoes],
+    SAMEPERIODLASTYEAR(dCalendario[Data])
+)
+                    </pre>
+                    <p>Medida das Exportações <span>YOY</span> (Yar Over Year):</p>
+                    <pre>
+YoY Exportacoes = 
+DIVIDE(
+    [Soma Exportacoes] - [Exportacoes LY],
+    [Exportacoes LY]
+)
+                    </pre>
+                    <p>Medida de Exportações trimestrais, utilizando uma tabela auxiliar para que o eixo do gráfico não seja filtrado pelo filtro de ano:</p>
+                    <pre>
+Exportacoes 4T = 
+VAR vN = 4
+VAR vData_filtro = CALCULATE(MAX(dCalendario[Data]), dCalendario[Incluir no filtro] = 1)
+VAR vPeriodo =
+DATESINPERIOD(
+    dcalendario_aux[Data],
+    vData_filtro,
+    - vN,
+    QUARTER
+)
+VAR vResultado =
+CALCULATE(
+    [Soma Exportacoes],
+    KEEPFILTERS(vPeriodo),
+    USERELATIONSHIP(dcalendario_aux[Data], fExportacao[Data]),
+    ALL(dCalendario)
+)
+RETURN
+vResultado
+                    </pre>
+                    <p>Medida da <span>Cotação</span> mensal para cálculo trimestral:</p>
+                    <pre>Cotacao = AVERAGE(fCotacao[cotacao])</pre>
+                    <p>Coluna calculada para cotações mensais:</p>
+                    <pre>Real = fExportacao[VL_FOB] * [Cotacao]</pre>
+                </div>
+                <div class="column right">
+                    <p>Medida de Exportações BRL:</p>
+                    <pre>Soma Exportacoes Real = SUM(fExportacao[Real])</pre>
+                    <p>Medida para criar tabela auxiliar de países com a categoria "outros":</p>
+                    <pre>
+dPais c Outros = 
+UNION(
+    ALLNOBLANKROW(dPais[Pais]),
+    {"Outros"}
+)
+                    </pre>
+                    <p>Medida para agrupar as Exportações na categoria "outros" (fora do Top N países), utilizando uma tabela auxiliar:</p>
+                    <pre>
+Top N paises exportacoes = 
+VAR vN = [Top 10 Valor]
+VAR vTabela_TopN =
+TOPN(
+    vN,
+    ALL('dPais c Outros'[Pais]),
+    CALCULATE(
+        [Soma Exportacoes],
+        USERELATIONSHIP('dPais c Outros'[Pais], dPais[Pais])
+    )
+)
+VAR vExportacoes_TopN =
+CALCULATE(
+    [Soma Exportacoes],
+    KEEPFILTERS(vTabela_TopN),
+    USERELATIONSHIP('dPais c Outros'[Pais], dPais[Pais])
+)
+VAR vTabela_Outros =
+EXCEPT(
+    ALL('dPais c Outros'[Pais]),
+    vTabela_TopN
+)
+VAR vExportacoes_Outros =
+CALCULATE(
+    [Soma Exportacoes],
+    vTabela_Outros,
+    USERELATIONSHIP('dPais c Outros'[Pais], dPais[Pais])
+)
+VAR vResultado =
+IF(
+    SELECTEDVALUE('dPais c Outros'[Pais]) = "Outros",
+        vExportacoes_Outros,
+    vExportacoes_TopN
+)
+RETURN
+vResultado
+                    </pre>
+                    <p>Medida para calcular o top 3 grupos por saldo, mostrada no tooltip:</p>
+                    <pre>
+Top 3 grupo por saldo = 
+VAR vRanking = 
+RANKX(
+    ALL(dSH4[Grupo]),
+    [Saldo da Balanca]
+)
+RETURN
+vRanking
+                    </pre>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ETL e Modelagem -->
+    <section class="modeling" id="modeling">
+        <div class="max-width">
+            <h2 class="title">ETL e Modelagem</h2>
+            <div class="modeling-content">
+
+                <div class="column left">
+                    <div class="text">Relacionamento entre as tabelas</div>
+                    <p>O processo de <span>ETL</span> deste projeto foi feito inteiramente em <span>Power Query</span>. Após extrair, limpar e transformar os dados, foram criadas tabelas de fatos e dimensões. E também foi criada, em linguagem M, uma tabela <span>dimensão calendário</span>, que possibilita centralizar as datas, permitindo melhor consistência nas análises ao trabalhar com funções de inteligência de tempo.</p>
+                    <p>A modelagem foi feita usando o <span>esquema estrela</span> (ver figura ao lado), no qual há 3 <span>tabelas de fatos</span> (Exportações, Importações e Cotações), que contém os valores e que são filtradas pelas <span>tabelas de dimensões</span>, que trazem os contextos. É possível notar que tabelas auxiliares foram criadas e relacionadas, porém seus relacionamentos estão inativos (podendo serem ativados com medidas DAX).</p>
+                    <br>
+                    <p>Também é possível perceber que tabela fato só se relaciona com tabela dimensão e vice-versa. O relacionamento entre as tabelas é de um para muitos (1:*), com o filtro sempre indo da dimensão para a fato.</p>
+                    Neste projeto não temos tabela ponte (fato sem fato) nem diferença de granularidade que poderia gerar relacionamento muitos para muitos (*:*).
+                </div>
+
+                <div class="column right3">
+                    <img src="https://uploaddeimagens.com.br/images/004/418/577/full/modelo.jpg" alt="star schema">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!--rodapé início-->
+    <footer>
+        <span>Criado por <a href="https://github.com/1caroMartins" target="_blank">Icaro Martins</a> | <span class="far fa-copyright"></span> 2023 Todos os direitos reservados.</span>
+    </footer>
+
+</body>
+</html>

@@ -961,6 +961,12 @@ section .title::after{
     object-fit: cover;
     border-radius: 6px;
 }
+.modeling .modeling-content .right3 img{
+    height: 320px;
+    width: 660px;
+    object-fit: cover;
+    border-radius: 6px;
+}
 /* Sessão rodapé estilo */
 footer{
     background: #111;
