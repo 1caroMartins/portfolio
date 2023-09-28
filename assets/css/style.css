@@ -361,6 +361,8 @@ section .title::after{
 .about .about-content .right p{
     text-align: justify;
 }
+
+/*
 .about .about-content .right a{
     display: inline-block;
     background: #118DFF;
@@ -377,6 +379,8 @@ section .title::after{
     color: #118DFF;
     background: none;
 }
+*/
+
 /* sessão conhecimentos estilo */
 .skills{
     color: #fafafa;
